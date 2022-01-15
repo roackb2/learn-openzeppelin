@@ -9,15 +9,16 @@ async function attachBox(address) {
   return box
 }
 
-async function retrieveBox(args) {
-  const { address } = args
+async function retrieveBox() {
+  const address = process.env.CONTRACT_ADDRESS
   const box = await attachBox(address)
   const value = await box.retrieve()
   console.log(`value in box: ${value}`)
 }
 
 async function storeToBox(args) {
-  const { value, address } = args
+  const address = process.env.CONTRACT_ADDRESS
+  const { value } = args
   try {
     const num = parseInt(value, 10)
     const box = await attachBox(address)

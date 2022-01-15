@@ -10,8 +10,8 @@
     "deploy": "npm run local --g deploy",
     "console": "npm run local -- console",
     "list-accounts": "npm run local -- list-accounts",
-    "retrieve-box": "npm run local -- retrieve-box --address",
-    "store-to-box": "npm run local -- store-to-box"
+    "retrieve-box": "npm run local -- retrieve-box",
+    "store-to-box": "npm run local -- store-to-box --value"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "hardhat": "^2.8.2"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.4.2"
+    "@openzeppelin/contracts": "^4.4.2",
+    "dotenv": "^12.0.3"
   }
 }
