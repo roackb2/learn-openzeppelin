@@ -4,3 +4,4 @@ cache
 local
 .env
 !.env.example
+secrets.json
