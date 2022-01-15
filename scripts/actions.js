@@ -1,6 +1,8 @@
 async function getContractAddress() {
   const network = await ethers.provider.getNetwork();
   switch (network.name) {
+    case 'mainnet':
+      return process.env.MAINNET_CONTRACT_ADDRESS
     case 'rinkeby':
       return process.env.RINKEBY_CONTRACT_ADDRESS
     default:

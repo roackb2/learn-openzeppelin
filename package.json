@@ -19,12 +19,20 @@
     "testnet:list-accounts": "npm run testnet -- list-accounts",
     "testnet:get-balance": "npm run testnet -- get-balance",
     "testnet:retrieve-box": "npm run testnet -- retrieve-box",
-    "testnet:store-to-box": "npm run testnet -- store-to-box --value"
+    "testnet:store-to-box": "npm run testnet -- store-to-box --value",
+    "mainnet": "npx hardhat --network mainnet",
+    "mainnet:deploy": "npm run mainnet -- deploy",
+    "mainnet:console": "npm run mainnet -- console",
+    "mainnet:list-accounts": "npm run mainnet -- list-accounts",
+    "mainnet:get-balance": "npm run mainnet -- get-balance",
+    "mainnet:retrieve-box": "npm run mainnet -- retrieve-box",
+    "mainnet:store-to-box": "npm run mainnet -- store-to-box --value"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
+    "@nomiclabs/hardhat-etherscan": "^3.0.0",
     "@nomiclabs/hardhat-truffle5": "^2.0.3",
     "@nomiclabs/hardhat-web3": "^2.0.0",
     "@openzeppelin/test-helpers": "^0.5.15",
