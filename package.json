@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "npx hardhat compile",
     "local": "npx hardhat --network localhost",
-    "deploy": "npm run local --- deploy",
+    "deploy": "npm run local -- deploy",
     "console": "npm run local -- console",
-    "list-accounts": "npm run local -- list-accounts"
+    "list-accounts": "npm run local -- list-accounts",
+    "retrieve-box": "npm run local -- retrieve-box --address"
   },
   "author": "",
   "license": "ISC",
