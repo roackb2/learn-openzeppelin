@@ -5,11 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "npx hardhat compile"
+    "compile": "npx hardhat compile",
+    "local": "npx hardhat --network localhost",
+    "deploy": "npm run local --- deploy",
+    "console": "npm run local -- console",
+    "list-accounts": "npm run local -- list-accounts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.4",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "ethers": "^5.5.3",
     "hardhat": "^2.8.2"
   },
   "dependencies": {
