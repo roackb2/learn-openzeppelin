@@ -1,20 +1,31 @@
+async function deploy(name, ...args) {
+  const Contract = await ethers.getContractFactory(name);
+  console.log(`Deploying ${name} contract with args ${args}...`);
+  const contract = await Contract.deploy(...args);
+  await contract.deployed();
+  console.log(`${name} contract deployed to ${contract.address}`);
+}
+
 async function deployBox() {
-  const Box = await ethers.getContractFactory('Box');
-  console.log('Deploying our Box...');
-  const box = await Box.deploy();
-  await box.deployed();
-  console.log(`Our box deployed to ${box.address}`);
+  await deploy('Box')
 }
 
 async function deployCoin() {
-  const Coin = await ethers.getContractFactory('Coin');
-  console.log('Deploying Coin contract...');
-  const coin = await Coin.deploy();
-  await coin.deployed();
-  console.log(`Coin contract deployed to ${coin.address}`);
+  await deploy('Coin')
+}
+
+async function deploySimpleAuction(args) {
+  const { biddingTime, beneficiary } = args
+  await deploy('SimpleAuction', biddingTime, beneficiary)
+}
+
+async function deployBlindAuction(args) {
+  await deploy('BlindAuction', ...args)
 }
 
 module.exports = {
   deployBox,
-  deployCoin
+  deployCoin,
+  deploySimpleAuction,
+  deployBlindAuction
 }
