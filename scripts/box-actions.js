@@ -2,17 +2,12 @@ async function getContractAddress() {
   const network = await ethers.provider.getNetwork();
   switch (network.name) {
     case 'mainnet':
-      return process.env.MAINNET_CONTRACT_ADDRESS
+      return process.env.MAINNET_BOX_CONTRACT_ADDRESS
     case 'rinkeby':
-      return process.env.RINKEBY_CONTRACT_ADDRESS
+      return process.env.RINKEBY_BOX_CONTRACT_ADDRESS
     default:
-      return process.env.CONTRACT_ADDRESS
+      return process.env.BOX_CONTRACT_ADDRESS
   }
-}
-
-async function listAccounts() {
-  const accounts = await ethers.provider.listAccounts()
-  console.log(accounts)
 }
 
 async function attachBox(address) {
@@ -43,15 +38,7 @@ async function storeToBox(args) {
   }
 }
 
-async function getBalance() {
-  const accounts = await ethers.provider.listAccounts()
-  const balance = await ethers.provider.getBalance(accounts[0])
-  console.log(`balance: ${balance.toString()}`)
-}
-
 module.exports = {
-  listAccounts,
   retrieveBox,
-  storeToBox,
-  getBalance
+  storeToBox
 }
