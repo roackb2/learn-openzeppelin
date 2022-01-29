@@ -8,4 +8,4 @@ Currently, following contracts are included:
 
 - Box.sol: A minimal contract that just store a number and allow retrieval.
 - Coin.sol: A contract that issues new crypto currency and allow minting and transferring between accounts.
-- BlindAuction.sol: under development
+- auctions/SimpleAuction.sol: An open auction that allow everyone to bid, and the highest wins the bid. Bidders could withdraw after auction ends if they are not the winner.
