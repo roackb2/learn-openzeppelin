@@ -20,7 +20,8 @@ async function deploySimpleAuction(args) {
 }
 
 async function deployBlindAuction(args) {
-  await deploy('BlindAuction', ...args)
+  const { biddingTime, revealTime, beneficiary } = args
+  await deploy('BlindAuction', biddingTime, revealTime, beneficiary)
 }
 
 module.exports = {

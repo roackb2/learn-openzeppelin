@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "hardhat/console.sol";
+
 contract BlindAuction {
   struct Bid  {
     bytes32 blindedBid;
@@ -137,5 +139,11 @@ contract BlindAuction {
     emit AuctionEnded(highestBidder, highestBid);
     ended = true;
     beneficiary.transfer(highestBid);
+  }
+
+  // The fallback function
+  receive() external payable {
+    console.log('Warning: calling receive function');
+    pendingReturns[msg.sender] += msg.value;
   }
 }
