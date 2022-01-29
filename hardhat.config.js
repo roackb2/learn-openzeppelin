@@ -32,7 +32,8 @@ const {
   auctionEnd
 } = require('./scripts/simple-auction-actions')
 const {
-  bid: blindAuctionBid
+  bid: blindAuctionBid,
+  reveal
 } = require('./scripts/blind-auction-actions')
 const { task } = require('hardhat/config')
 const {
@@ -96,6 +97,12 @@ task('blind-auction-bid', 'Place a blinded bid on the blind auction')
   .addParam('secret', 'Some secret to salt the blinded bid')
   .addParam('deposit', 'Amount of ETH to send along with the blinded bid')
   .setAction(blindAuctionBid)
+
+task('blind-auction-reveal', 'Reveal the blinded bid on the blind auction')
+  .addParam('value', 'The amount to bid claimed in the blinded bid')
+  .addParam('fake', 'Is this bid marked as fake')
+  .addParam('secret', 'Some secret to salt the blinded bid')
+  .setAction(reveal)
  
 module.exports = {
   solidity: '0.8.4',

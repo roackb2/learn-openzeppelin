@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/utils/Strings.sol";
 import "hardhat/console.sol";
 
 contract BlindAuction {
@@ -75,6 +76,8 @@ contract BlindAuction {
     payable
     onlyBefore(biddingEnd)
   {
+    console.log("blindedBid");
+    console.logBytes32(blindedBid);
     bids[msg.sender].push(Bid({
       blindedBid: blindedBid,
       deposit: msg.value
@@ -98,11 +101,14 @@ contract BlindAuction {
     for (uint i = 0; i < length; i++) {
       Bid storage bidToCheck = bids[msg.sender][i];
       (uint value, bool fake, bytes32 secret) = (values[i], fakes[i], secrets[i]);
-      if (bidToCheck.blindedBid != keccak256(abi.encodePacked(value, fake, secret))) {
+      bytes32 bidHash = keccak256(abi.encodePacked(value, fake, secret));
+      if (bidToCheck.blindedBid != bidHash) {
         // Bid was not actually revealed.
         // Do not refund deposit.
+        console.log("Not correctly revealed");
         continue;
       }
+      console.log("Bid correctly revealed");
       refund += bidToCheck.deposit;
       if (!fake && bidToCheck.deposit >= value) {
         // If successfully placing the bid,

@@ -20,13 +20,13 @@ async function attachToBlindAuctionContract() {
 async function bid(args) {
   try {
     const { value, fake, secret, deposit } = args
-    console.log(value, fake, secret, deposit)
-    const types = ['uint', 'bool', 'string']
+    const types = ['uint', 'bool', 'bytes32']
     const values = [
       value,
       fake === 'true' ? true : false,
       ethers.utils.formatBytes32String(secret)
     ]
+    console.log('values:', values)
     const blindedBid = await ethers.utils.solidityKeccak256(types, values)
     console.log(`The blinded bid: ${blindedBid}`)
     const contract = await attachToBlindAuctionContract()
@@ -36,10 +36,27 @@ async function bid(args) {
     await txn.wait()
     console.log(`Successfully place blinded bid with value: ${value}, fake ${fake} and secret: ${secret}`)
   } catch (err) {
-    console.error(`Error placing blind bid: ${err}`)
+    console.error('Error placing blind bid', err)
+  }
+}
+
+async function reveal(args) {
+  try {
+    const { value, fake, secret } = args
+    // TODO: support reveal of multiple bids
+    const values = [value]
+    const fakes = [fake === 'true' ? true : false]
+    const secrets = [ethers.utils.formatBytes32String(secret)]
+    const contract = await attachToBlindAuctionContract()
+    const txn = await contract.reveal(values, fakes, secrets)
+    await txn.wait()
+    console.log(`Successfully reveal the bid with value: ${value}, fake ${fake} and secret: ${secret}`)
+  } catch (err) {
+    console.error('Error revealing bid', err)
   }
 }
 
 module.exports = {
-  bid
+  bid,
+  reveal
 }

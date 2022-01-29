@@ -22,7 +22,8 @@
     "simple-auction:withdraw": "npx hardhat withdraw --network",
     "simple-auction:end": "npx hardhat auction-end --network",
     "blind-auction:deploy": "npx hardhat deploy-blind-auction --network",
-    "blind-auction:bid": "npx hardhat blind-auction-bid --network"
+    "blind-auction:bid": "npx hardhat blind-auction-bid --network",
+    "blind-auction:reveal": "npx hardhat blind-auction-reveal --network"
   },
   "author": "",
   "license": "ISC",
