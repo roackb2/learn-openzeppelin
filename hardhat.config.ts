@@ -1,41 +1,45 @@
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-require('dotenv').config()
-require('@nomiclabs/hardhat-ethers')
-require('@nomiclabs/hardhat-web3')
-require('@nomiclabs/hardhat-truffle5');
-require('@nomiclabs/hardhat-etherscan');
-const {
+import dotenv from 'dotenv'
+import '@nomiclabs/hardhat-ethers'
+import '@nomiclabs/hardhat-web3'
+import '@nomiclabs/hardhat-truffle5';
+import '@nomiclabs/hardhat-etherscan';
+import '@matterlabs/hardhat-zksync-deploy';
+import '@matterlabs/hardhat-zksync-solc';
+import {
   deployBox,
   deployCoin,
   deploySimpleAuction,
   deployBlindAuction,
-} = require('./scripts/deploy.js')
-const {
+} from './scripts/deploy.js'
+import {
   getBalance,
   listAccounts
-} = require('./scripts/general-actions')
-const {
+} from './scripts/general-actions'
+import {
   retrieveBox,
   storeToBox,
-} = require('./scripts/box-actions')
-const {
+} from './scripts/box-actions'
+import {
   mint,
   send,
   getCoinBalance,
   getSelfCoinBalance
-} = require('./scripts/coin-actions')
-const {
+} from './scripts/coin-actions'
+import {
   bid,
   withdraw,
   auctionEnd
-} = require('./scripts/simple-auction-actions')
-const {
-  bid: blindAuctionBid,
+} from './scripts/simple-auction-actions'
+import {
+  bid as blindAuctionBid,
   reveal
-} = require('./scripts/blind-auction-actions')
-const { task } = require('hardhat/config')
+} from './scripts/blind-auction-actions'
+import { task } from 'hardhat/config'
+
+dotenv.config()
 const {
   MAINNET_ALCHEMY_API_KEY,
   MAINNET_ACCOUNT_PRIVATE_KEY,
@@ -105,7 +109,23 @@ task('blind-auction-reveal', 'Reveal the blinded bid on the blind auction')
   .setAction(reveal)
  
 module.exports = {
-  solidity: '0.8.4',
+  solidity: '0.8.10',
+  zksolc: {
+    version: "0.1.0",
+    compilerSource: "docker",
+    settings: {
+      optimizer: {
+        enabled: true,
+      },
+      experimental: {
+        dockerImage: "matterlabs/zksolc",
+      },
+    },
+  },
+  zkSyncDeploy: {
+    zkSyncNetwork: "https://zksync2-testnet.zksync.dev",
+    ethNetwork: "goerli",
+  },
   networks: {
     mainnet: {
       url: `https://eth-mainnet.alchemyapi.io/v2/${MAINNET_ALCHEMY_API_KEY}`,
